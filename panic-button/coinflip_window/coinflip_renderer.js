@@ -31,9 +31,12 @@ function randomizeButtons() {
 
     headsButton.style.left = headsPosition.left;
     headsButton.style.top = headsPosition.top;
+    headsButton.style.position = 'absolute';
 
     tailsButton.style.left = tailsPosition.left;
     tailsButton.style.top = tailsPosition.top;
+    tailsButton.style.position = 'absolute';
+
 }
 
 window.onload(() => {
