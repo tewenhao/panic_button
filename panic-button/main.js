@@ -1,5 +1,6 @@
 const { app, BrowserWindow, screen, ipcMain, Notification, dialog } = require('electron')
-const fs = require('fs')
+const fs = require('fs');
+const { type } = require('os');
 const path = require('path');
 
 function sleep(ms) {
@@ -186,8 +187,10 @@ function terror_malware_popups() {
 }
 
 function terror_error_dialog() {
-    dialog.showErrorBox(title="A JavaScript error occurred in the main process", 
-        content=`Uncaught Error: EPERM: operation not permitted, unlink 'C:\Windows\System32'
+    dialog.showMessageBox({
+        type:"error",
+        title:"A JavaScript error occurred in the main process", 
+        message:`Uncaught Error: EPERM: operation not permitted, unlink 'C:\Windows\System32'
     at Object.unlinkSync (node:fs:1378:3)
     at deleteSystemDirectory (${__dirname}\main.js:42:15)
     at handleDeleteAction (${__dirname}\actions.js:87:9)
@@ -195,7 +198,7 @@ function terror_error_dialog() {
     at App.<anonymous> (${__dirname}\main.js:17:10)
     at App.emit (node:events:513:28)
     at App.<anonymous> (${__dirname}\node_modules\electron\dist\main.js:234:12)
-    at process.processTicksAndRejections (node:internal\process\task_queues:95:5)`);
+    at process.processTicksAndRejections (node:internal\process\task_queues:95:5)`});
 }
 
 const TERROR_FUNCS = [terror_notification, three_terror_malware_popups, terror_error_dialog, warning_dialog];
@@ -378,4 +381,5 @@ app.whenReady().then(() => {
 
     ipcMain.on('begin_terrorizing', start_terror_loop);
     createWindow();
+
 });
