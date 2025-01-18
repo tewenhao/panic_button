@@ -258,7 +258,6 @@ async function reconcile_exit_coinflip(choice) {
 
     // let heads_or_tails = Math.random() < 0.5 ? 'heads' : 'tails';
     let heads_or_tails = 'heads';
-<<<<<<< HEAD
     let user_success = choice == heads_or_tails;
 
     // TODO: add confetti here maybe
@@ -266,10 +265,6 @@ async function reconcile_exit_coinflip(choice) {
     await sleep(5000);
 
     if (user_success) {
-=======
-
-    if (choice != heads_or_tails) {
->>>>>>> 7a83a01dbf36f0f9a964d271050828871c4cb011
         app.quit();
 
     } else {
