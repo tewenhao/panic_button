@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <title>Hello from Electron renderer!</title>
-  </head>
-  <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-  </body>
+<head>
+    <title>Transparent Landing Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            -webkit-app-region: drag; /* Makes the window draggable */
+        }
+
+        #actionButton {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #ff0000;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            -webkit-app-region: no-drag; /* Makes the button clickable */
+        }
+
+        #actionButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        #actionButton:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <button id="actionButton"></button>
+    <script src="renderer.js"></script>
+</body>
 </html>
