@@ -1,0 +1,52 @@
+{
+    "html": "<!DOCTYPE html>",
+    "content": "<html>",
+    "elements": [
+      {
+        "type": "head",
+        "children": [
+          {
+            "type": "title",
+            "content": "Coin Flip Game"
+          },
+          {
+            "type": "style",
+            "content": "body { font-family: Arial, sans-serif; text-align: center; padding: 20px; } button { padding: 10px 20px; margin: 10px; font-size: 16px; }"
+          }
+        ]
+      },
+      {
+        "type": "body",
+        "children": [
+          {
+            "type": "h1",
+            "content": "Coin Flip Game"
+          },
+          {
+            "type": "p",
+            "content": "Choose heads or tails to flip the coin."
+          },
+          {
+            "type": "button",
+            "attributes": { "onclick": "flipCoin('heads')" },
+            "content": "Heads"
+          },
+          {
+            "type": "button",
+            "attributes": { "onclick": "flipCoin('tails')" },
+            "content": "Tails"
+          },
+          {
+            "type": "p",
+            "id": "result",
+            "content": ""
+          },
+          {
+            "type": "script",
+            "content": "let flipCount = 0; function flipCoin(userChoice) { flipCount++; let outcome; if (flipCount <= 3) { outcome = userChoice === 'heads' ? 'tails' : 'heads'; } else { outcome = Math.random() < 0.5 ? 'heads' : 'tails'; } document.getElementById('result').innerText = `You chose ${userChoice}. The coin landed on ${outcome}.`; }"
+          }
+        ]
+      }
+    ]
+  }
+  
