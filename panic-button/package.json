@@ -1,6 +1,6 @@
 {
   "name": "panic-button",
-  "prodyctName": "Panic Button",
+  "productName": "Panic Button",
   "version": "1.0.0",
   "description": "We are panicking",
   "main": "main.js",
