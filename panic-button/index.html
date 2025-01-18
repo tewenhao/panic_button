@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <audio id="eerie-sound" loop>
+      <source src="assets/eerie.mp3" type="audio/mpeg" />
+      Imagine, if you will, spooky music. 
+      Then imagine a browser that supports the audio element.
+    </audio>
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
@@ -16,6 +21,7 @@
     <h1>Hello from Electron renderer!</h1>
     <p>👋</p>
     <p id="info"></p>
+    <button onclick="document.getElementById('eerie-sound').play();">Begin</button>
   </body>
   <script src="./renderer.js"></script>
 </html>
