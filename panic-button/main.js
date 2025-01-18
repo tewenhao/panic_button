@@ -22,6 +22,7 @@ function createWindow() {
 
   // Load the index.html file
   mainWindow.loadFile('index.html')
+  mainWindow.setAlwaysOnTop(true)
   
   // Optional: Open DevTools for debugging
   // mainWindow.webContents.openDevTools()
