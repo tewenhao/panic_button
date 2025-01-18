@@ -14,3 +14,28 @@ function flipCoin(userChoice) {
     window.coinflip.submit_user_choice(userChoice);
     window.coinflip.close_window();
 }
+
+function randomizeButtons() {
+    const headsButton = document.getElementById('heads');
+    const tailsButton = document.getElementById('tails');
+    const bodyWidth = document.body.clientWidth;
+    const bodyHeight = document.body.clientHeight;
+
+    const randomPosition = () => ({
+        left: Math.random() * (bodyWidth - 100) + 'px',
+        top: Math.random() * (bodyHeight - 50) + 'px'
+    });
+
+    const headsPosition = randomPosition();
+    const tailsPosition = randomPosition();
+
+    headsButton.style.left = headsPosition.left;
+    headsButton.style.top = headsPosition.top;
+
+    tailsButton.style.left = tailsPosition.left;
+    tailsButton.style.top = tailsPosition.top;
+}
+
+window.onload(() => {
+    randomizeButtons();
+})

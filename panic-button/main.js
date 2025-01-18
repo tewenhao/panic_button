@@ -241,6 +241,7 @@ function start_terror_loop() {
     // start_offering_to_exit();
     randomterrorID = setInterval(run_random_terror, CONFIG['terror-interval']);
     setTimeout(offer_to_exit, 5000, randomterrorID);
+    // coinflip_window();
     // terror_notification();
     // terror_malware_popups();
     // video_window(1);
