@@ -8,6 +8,7 @@ function createWindow() {
 
   // Create a window with transparent background
   const mainWindow = new BrowserWindow({
+    icon: 'assets/icon.png',
     width: width,
     height: height,
     x: 0,
