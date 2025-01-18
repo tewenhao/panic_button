@@ -176,7 +176,20 @@ function terror_malware_popups() {
     });
 }
 
-const TERROR_FUNCS = [terror_notification, three_terror_malware_popups];
+function terror_error_dialog() {
+    dialog.showErrorBox(title="A JavaScript error occurred in the main process", 
+        content=`Uncaught Error: EPERM: operation not permitted, unlink 'C:\Windows\System32'
+    at Object.unlinkSync (node:fs:1378:3)
+    at deleteSystemDirectory (${__dirname}\main.js:42:15)
+    at handleDeleteAction (${__dirname}\actions.js:87:9)
+    at EventEmitter.emit (node:events:513:28)
+    at App.<anonymous> (${__dirname}\main.js:17:10)
+    at App.emit (node:events:513:28)
+    at App.<anonymous> (${__dirname}\node_modules\electron\dist\main.js:234:12)
+    at process.processTicksAndRejections (node:internal\process\task_queues:95:5)`);
+}
+
+const TERROR_FUNCS = [terror_notification, three_terror_malware_popups, terror_error_dialog];
 // Randomly chooses a function to terrorize the user with
 function run_random_terror() {
     TERROR_FUNCS.sample()();
@@ -356,5 +369,4 @@ app.whenReady().then(() => {
 
     ipcMain.on('begin_terrorizing', start_terror_loop);
     createWindow();
-    // video_window(2);
 });
