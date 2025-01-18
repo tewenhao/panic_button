@@ -113,6 +113,15 @@ function three_terror_malware_popups() {
     terror_malware_popups();
 }
 
+function warning_dialog() {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: 'PANIKINAPANIKINAPANIK',
+        message: 'I will delete sys32 now.',
+        buttons: ['AHHHHHHHHHHHHHHHH', '🤔']
+    });
+}
+
 function terror_malware_popups() {
     const panic_msgs = [
       "PANIK PANIK PANIKKKKKKK",
@@ -189,7 +198,7 @@ function terror_error_dialog() {
     at process.processTicksAndRejections (node:internal\process\task_queues:95:5)`);
 }
 
-const TERROR_FUNCS = [terror_notification, three_terror_malware_popups, terror_error_dialog];
+const TERROR_FUNCS = [terror_notification, three_terror_malware_popups, terror_error_dialog, warning_dialog];
 // Randomly chooses a function to terrorize the user with
 function run_random_terror() {
     TERROR_FUNCS.sample()();
