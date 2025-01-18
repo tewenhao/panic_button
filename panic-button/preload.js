@@ -11,6 +11,6 @@ contextBridge.exposeInMainWorld('actions', {
     begin_terrorizing: () => ipcRenderer.send('begin_terrorizing')
 })
 
-contextBridge.exposeInMainWorld('electronAPI', {
-    setTitle: (title) => ipcRenderer.send('set-title', title)
-  })
+// contextBridge.exposeInMainWorld('electronAPI', {
+//     setTitle: (title) => ipcRenderer.send('set-title', title)
+//   })

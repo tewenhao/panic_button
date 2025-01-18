@@ -169,9 +169,9 @@ app.on('activate', () => {
 
 // show window when app is ready
 app.whenReady().then(() => {
-    fs.readFile('terror_config.json', 'utf8', function (err, data) {
+    fs.readFile(CONFIG_PATH, 'utf8', function (err, data) {
       if (err) {
-        fs.writeFile('terror_config.json', JSON.stringify(CONFIG), 'utf8', function(err) {if (err) throw err;});
+        fs.writeFile(CONFIG_PATH, JSON.stringify(CONFIG), 'utf8', function(err) {if (err) throw err;});
       } else {
         CONFIG = JSON.parse(data);
       }
