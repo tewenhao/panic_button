@@ -201,6 +201,7 @@ function video_window(mode, is_heads=-1) {
     // Listen for the 'video-ended' message from the renderer process
     ipcMain.once('video-ended', () => {
         videoWindow.close();
+        return 0;
     });
 }
 
@@ -215,19 +216,27 @@ function start_terror_loop() {
 
 async function offer_to_exit(randomterrorID) {
     clearInterval(randomterrorID);
-    heads_or_tails = Math.random() < 0.5;
-    // heads_or_tails = false;
+    // heads_or_tails = Math.random() < 0.5;
+    heads_or_tails = false;
 
     if (heads_or_tails) {
         app.quit();
+
     } else {
         video_window(1);
         await sleep(30000);
+
+        let time_to_sleep = getRandomInt(30, 60);
+        
+        new Notification({
+            title: "Better luck next time!",
+            body: `Next coin flip in ${time_to_sleep} seconds`,
+            icon: path.join(__dirname, "assets/coin.png"),
+        }).show()
+
+        newID = setInterval(run_random_terror, CONFIG['terror-interval']);
+        setTimeout(offer_to_exit, time_to_sleep * 1000, newID);
     }
-
-
-    newID = setInterval(run_random_terror, CONFIG['terror-interval']);
-    setTimeout(offer_to_exit, 5000, newID);
 }
 
 
