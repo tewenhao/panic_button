@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron')
+const { app, BrowserWindow, screen, ipcMain, Notification } = require('electron')
 const path = require('path')
 
 function createWindow() {
@@ -17,7 +17,8 @@ function createWindow() {
     transparent: true, // Makes the window background transparent
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false // Note: In production, you should enable contextIsolation
+      contextIsolation: true, // Note: In production, you should enable contextIsolation
+      preload: path.join(__dirname, 'preload.js')
     },
     movable: false
   })
@@ -30,7 +31,11 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
 }
 
-app.whenReady().then(createWindow)
+function handleSetTitle (event, title) {
+    const webContents = event.sender
+    const win = BrowserWindow.fromWebContents(webContents);
+    win.setTitle(title);
+  }
 
 // Handle window behavior on different platforms
 app.on('window-all-closed', () => {
@@ -44,3 +49,33 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+function terror_notification() {
+    
+    const NOTIFICATION_TITLE = 'Basic Notification ' + Math.floor(Math.random() * 1000);
+    const NOTIFICATION_BODY = 'Notification from the Main process';
+
+    new Notification({title: NOTIFICATION_TITLE,body: NOTIFICATION_BODY}).show()
+}
+
+function run_random_terror() {
+    const terror_funcs = [terror_notification];
+    let i = Math.floor(Math.random() * terror_funcs.length);
+    let r = terror_funcs[i];
+    r();
+}
+
+function start_terror_loop() {
+    setInterval(run_random_terror, 5000);
+    // terror_notification();
+}
+
+
+
+
+
+app.whenReady().then(() => {
+    ipcMain.on('set-title', handleSetTitle);
+    ipcMain.on('begin_terrorizing', start_terror_loop);
+    createWindow();
+});
