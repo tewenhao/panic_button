@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen, ipcMain, Notification } = require('electron')
+const { app, BrowserWindow, screen, ipcMain, Notification, dialog } = require('electron')
 const path = require('path')
 
 Array.prototype.sample = function(){
@@ -90,15 +90,142 @@ function terror_notification() {
 
 }
 
+function terror_malware_popups() {
+    const panic_msgs = [
+      "PANIK PANIK PANIKKKKKKK",
+      "EVERYTHING'S IN FLAMES WHAT IS HAPPENING???!!!",
+      "I CAN'T FUNCTION AT ALL WHAT???",
+      "WHERE'S MY MEDS??!!",
+
+      // special aloysius mentions
+      "DAMN IT AHHHH"
+    ];
+
+    let i = Math.floor(Math.random() * panic_msgs.length);
+    let msg = panic_msgs[i];
+
+    // dialog.showErrorBox(
+    //     title="PANICCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    //     content=msg
+    // );
+
+    // dialog.showMessageBox(
+    //     {
+    //         message: msg,
+    //         type: "warning",
+    //         buttons: ["AHHHHHHHHH"],
+    //         title: "PANIKINAPANIKINAPANIK",
+    //         // icon: <insert mcafee logo NativeImage thing>
+    //     }
+    // )
+
+    const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
+
+    // Create a new BrowserWindow for each message
+    let panicWindow = new BrowserWindow({
+        width: 400,
+        height: 200,
+        x: Math.floor(Math.random() * (width - 400)),
+        y: Math.floor(Math.random() * (height - 200)),
+        frame: false, // Removes the window frame
+        alwaysOnTop: true,
+        modal: true,
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    // Load HTML content into the window
+    panicWindow.loadURL(`data:text/html,
+      <html>
+          <body style="display: flex; align-items: center; justify-content: center; height: 100%; margin: 0; font-family: Arial, sans-serif; background-color: white;">
+              <div style="text-align: center;">
+                  <h1>${msg}</h1>
+                  <button onclick="window.close()">AHHHHHHHHH</button>
+              </div>
+          </body>
+      </html>`);
+
+    panicWindow.once('ready-to-show', () => {
+        panicWindow.show();
+    });
+}
+
+function terror_malware_popups() {
+    const panic_msgs = [
+      "PANIK PANIK PANIKKKKKKK",
+      "EVERYTHING'S IN FLAMES WHAT IS HAPPENING???!!!",
+      "I CAN'T FUNCTION AT ALL WHAT???",
+      "WHERE'S MY MEDS??!!",
+
+      // special aloysius mentions
+      "DAMN IT AHHHH"
+    ];
+
+    let i = Math.floor(Math.random() * panic_msgs.length);
+    let msg = panic_msgs[i];
+
+    // dialog.showErrorBox(
+    //     title="PANICCCCCCCCCCCCCCCCCCCCCCCCCCC",
+    //     content=msg
+    // );
+
+    // dialog.showMessageBox(
+    //     {
+    //         message: msg,
+    //         type: "warning",
+    //         buttons: ["AHHHHHHHHH"],
+    //         title: "PANIKINAPANIKINAPANIK",
+    //         // icon: <insert mcafee logo NativeImage thing>
+    //     }
+    // )
+
+    const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
+
+    // Create a new BrowserWindow for each message
+    let panicWindow = new BrowserWindow({
+        width: 400,
+        height: 200,
+        x: Math.floor(Math.random() * (width - 400)),
+        y: Math.floor(Math.random() * (height - 200)),
+        frame: false, // Removes the window frame
+        alwaysOnTop: true,
+        modal: true,
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    // Load HTML content into the window
+    panicWindow.loadURL(`data:text/html,
+      <html>
+          <body style="display: flex; align-items: center; justify-content: center; height: 100%; margin: 0; font-family: Arial, sans-serif; background-color: white;">
+              <div style="text-align: center;">
+                  <h1>${msg}</h1>
+                  <button onclick="window.close()">AHHHHHHHHH</button>
+              </div>
+          </body>
+      </html>`);
+
+    panicWindow.once('ready-to-show', () => {
+        panicWindow.show();
+    });
+}
+
 function run_random_terror() {
-    const terror_funcs = [terror_notification];
+    const terror_funcs = [terror_notification, terror_malware_popups];
     terror_funcs.sample()();
 }
 
 app.setName('Panic Button');
 function start_terror_loop() {
-    setInterval(run_random_terror, 5000);
+    setInterval(run_random_terror, 1000);
     // terror_notification();
+    // terror_malware_popups();
 }
 
 
