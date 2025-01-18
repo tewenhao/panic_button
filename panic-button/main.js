@@ -60,7 +60,7 @@ function terror_notification() {
             break;
         case 'Telegram':
             // NOTIFICAION_SENDERID = 'Telegram';
-            NOTIFICATION_TITLE = 'CP2106 Final Project Group #6';
+            NOTIFICATION_TITLE = 'Group Project #6';
             NOTIFICATION_BODY = '+65 82637422: Eh guys submission is tmr, how ah';
             NOTIFICATION_ICON = 'assets/notification-icons/telegram.png';
             break;
@@ -144,10 +144,61 @@ function run_random_terror() {
     TERROR_FUNCS.sample()();
 }
 
+/// mode: an integer that takes the value of either 0 or 1, each representing a different case
+/// 0 - coin flip; 1 - unskippable hero wars ad
+function video_window(mode, is_heads=-1) {
+    const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
+    let vid_path;
+    let window_width;
+    let window_height;
+    
+    if (mode == 0) {
+        vid_path = is_heads ? "assets/heads-or-tails/heads.mp4" : "assets/heads-or-tails/tails.mp4";
+        window_width = 500;
+        window_height = 500;
+    }
+    
+    else {
+        vid_path = "assets/unskippable-ad/ad.mp4"
+        window_width = width - 100;
+        window_height = height - 100;
+    }
+
+    let videoWindow = new BrowserWindow({
+        width: window_width,
+        height: window_height,
+        x: Math.floor(width / 2) - Math.floor(window_width / 2),
+        y: Math.floor(height / 2) - Math.floor(window_height / 2),
+        frame: false, // Removes the window frame
+        alwaysOnTop: true,
+        modal: true,
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    // Load the HTML file
+    videoWindow.loadFile('video_player.html'); // Update with the correct path
+
+    videoWindow.once('ready-to-show', () => {
+        // Send the video path to the renderer process
+        videoWindow.webContents.send('set-video-path', path.resolve(vid_path));
+        videoWindow.show();
+    });
+
+    // Listen for the 'video-ended' message from the renderer process
+    ipcMain.once('video-ended', () => {
+        videoWindow.close();
+    });
+}
+
 function start_terror_loop() {
     setInterval(run_random_terror, CONFIG['terror-interval']);
     // terror_notification();
     // terror_malware_popups();
+    video_window(1);
 }
 
 
