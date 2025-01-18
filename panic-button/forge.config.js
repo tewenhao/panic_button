@@ -2,8 +2,10 @@ const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
-  packagerConfig: {
-    asar: true,
+  packagerConfig: { 
+    asar: true, 
+    icon: './assets/icon',
+    extraResource: ['./assets/']
   },
   rebuildConfig: {},
   makers: [
@@ -41,4 +43,10 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
+  // hooks: {
+  //   preStart: async (forgeConfig) => {
+  //     console.log(`Starting up app on platform: ${process.platform}`);
+  //     generateAssets(forgeConfig, )
+  //   }
+  // }
 };
