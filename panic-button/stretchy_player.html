@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Player</title>
+    <style>
+        /* body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: black;
+            overflow: hidden;
+        } */
+        .wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        video {
+            object-fit: cover;
+            min-height: 100%;
+            min-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <video id="video" autoplay>
+            <source id="videoSource" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <script>
+        const { ipcRenderer } = require('electron');
+    
+        // Set the video source
+        const videoSource = document.getElementById('videoSource');
+    
+        // Listen for the 'set-video-path' message from the main process
+        ipcRenderer.on('set-video-path', (event, videoPath) => {
+            videoSource.src = videoPath;
+            const video = document.getElementById('video');
+            video.load();
+            video.play();
+        });
+    
+        // Listen for the video to end
+        video.addEventListener('ended', () => {
+            // Notify the main process that the video has ended
+            ipcRenderer.send('video-ended');
+        });
+    </script>    
+</body>
+</html>
