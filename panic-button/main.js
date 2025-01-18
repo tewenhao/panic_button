@@ -85,6 +85,12 @@ function terror_notification() {
 
 }
 
+function three_terror_malware_popups() {
+    terror_malware_popups();
+    terror_malware_popups();
+    terror_malware_popups();
+}
+
 function terror_malware_popups() {
     const panic_msgs = [
       "PANIK PANIK PANIKKKKKKK",
@@ -148,7 +154,7 @@ function terror_malware_popups() {
     });
 }
 
-const TERROR_FUNCS = [terror_notification, terror_malware_popups];
+const TERROR_FUNCS = [terror_notification, three_terror_malware_popups];
 // Randomly chooses a function to terrorize the user with
 function run_random_terror() {
     TERROR_FUNCS.sample()();
@@ -200,10 +206,14 @@ function video_window(mode, is_heads=-1) {
         window_height = 500;
     }
     
-    else {
+    else if (mode == 1) {
         vid_path = "assets/unskippable-ad/ad.mp4"
         window_width = width - 100;
         window_height = height - 100;
+    } else if (mode == 2) {
+        vid_path = 'assets/ultrakill-5s-congrats.mp4'
+        window_width = 500;
+        window_height = 500;
     }
 
     let videoWindow = new BrowserWindow({
@@ -239,16 +249,18 @@ function video_window(mode, is_heads=-1) {
 
 function start_terror_loop() {
     // start_offering_to_exit();
+
     randomterrorID = setInterval(run_random_terror, CONFIG['terror-interval']);
     setTimeout(offer_to_exit, 5000, randomterrorID);
+
     // coinflip_window();
     // terror_notification();
     // terror_malware_popups();
-    // video_window(1);
     // offer_to_exit(0);
 }
 
 async function offer_to_exit(randomterrorID) {
+
     clearInterval(randomterrorID);
     coinflip_window();  
 
@@ -266,10 +278,13 @@ async function reconcile_exit_coinflip(choice) {
     await sleep(5000);
 
     if (user_success) {
+        video_window(2); // display ultrakill congrats
+        await sleep(30000);
+
         app.quit();
 
     } else {
-        video_window(1);
+        video_window(1); // display hero wars ad
         await sleep(30000);
 
         let time_to_sleep = getRandomInt(30, 60);
