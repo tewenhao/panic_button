@@ -2,7 +2,7 @@
 
 ## Usage Guide
 
-1. Follow this guide and install everything (AND WE MEAN EVERYTHING)
+1. [Follow this guide](https://www.electronjs.org/docs/latest/tutorial/tutorial-prerequisites) and install everything (AND WE MEAN EVERYTHING)
 2. Clone this repository
 3. Change your working directory to this repository
 4. Run in terminal `cd panic-button`
