@@ -154,6 +154,29 @@ function run_random_terror() {
     TERROR_FUNCS.sample()();
 }
 
+function coinflip_window() {
+    const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
+    let window_width;
+    let window_height;
+
+    let coinflipWindow = new BrowserWindow({
+        width: window_width,
+        height: window_height,
+        x: Math.floor(width / 2) - Math.floor(window_width / 2),
+        y: Math.floor(height / 2) - Math.floor(window_height / 2),
+        frame: false, // Removes the window frame
+        alwaysOnTop: true,
+        modal: true,
+        show: false,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    coinflipWindow.loadFile("coinflip.html");
+}
+
 /// mode: an integer that takes the value of either 0 or 1, each representing a different case
 /// 0 - coin flip; 1 - unskippable hero wars ad
 function video_window(mode, is_heads=-1) {
@@ -216,6 +239,7 @@ function start_terror_loop() {
 
 async function offer_to_exit(randomterrorID) {
     clearInterval(randomterrorID);
+    
     // heads_or_tails = Math.random() < 0.5;
     heads_or_tails = false;
 
