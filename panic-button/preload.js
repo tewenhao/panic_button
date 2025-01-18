@@ -8,7 +8,8 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 contextBridge.exposeInMainWorld('actions', {
-    begin_terrorizing: () => ipcRenderer.send('begin_terrorizing')
+    begin_terrorizing: () => ipcRenderer.send('begin_terrorizing'),
+    set_on_top: (channel, data) => ipcRenderer.send(channel, data)
 })
 
 // contextBridge.exposeInMainWorld('electronAPI', {

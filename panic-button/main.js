@@ -44,11 +44,26 @@ function createWindow() {
 
   // Load the index.html file
   mainWindow.loadFile('index.html')
-  mainWindow.setAlwaysOnTop(true)
+  // mainWindow.setAlwaysOnTop(true);
+  
+  // ipcMain.on('set-always-on-top', (event, flag) => {
+  //   mainWindow.setAlwaysOnTop(flag, flag === true ? "normal" : "floating");
+  // });
   
   // Optional: Open DevTools for debugging
   // mainWindow.webContents.openDevTools()
 }
+
+// Register the ipcMain listener outside of createWindow
+ipcMain.on('set-always-on-top', (event, flag) => {
+  const mainWindow = BrowserWindow.getAllWindows()[0];
+  if (mainWindow && flag) {
+    mainWindow.moveTop();
+    mainWindow.setAlwaysOnTop(flag);
+    console.log(`Set always on top: ${flag}`);
+    console.log(`Window is always on top: ${mainWindow.isAlwaysOnTop()}`);
+  }
+});
 
 function terror_notification() {
 
