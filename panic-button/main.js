@@ -75,7 +75,7 @@ function terror_notification() {
             break;
         case 'Telegram':
             // NOTIFICAION_SENDERID = 'Telegram';
-            NOTIFICATION_TITLE = 'Group Project #6';
+            NOTIFICATION_TITLE = 'CP2106 Final Project Group #6';
             NOTIFICATION_BODY = '+65 82637422: Eh guys submission is tmr, how ah';
             NOTIFICATION_ICON = 'assets/notification-icons/telegram.png';
             break;
