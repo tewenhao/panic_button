@@ -332,7 +332,7 @@ app.whenReady().then(() => {
     });
 
 
-    // ipcMain.on('begin_terrorizing', start_terror_loop);
+    ipcMain.on('begin_terrorizing', start_terror_loop);
     createWindow();
-    video_window(2);
+    // video_window(2);
 });
