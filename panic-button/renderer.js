@@ -9,6 +9,7 @@ button.addEventListener('click', () => {
 
 function triggerEvent() {
     document.getElementById('eerie-sound').play();
+    document.getElementById('actionButton').style.display = 'none';
     window.electronAPI.setTitle('Panic Button');
     window.actions.begin_terrorizing();
     // This function can contain different events that you want to trigger
