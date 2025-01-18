@@ -1,6 +1,10 @@
 const { app, BrowserWindow, screen, ipcMain, Notification, dialog } = require('electron')
 const fs = require('fs')
-const path = require('path')
+const path = require('path');
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // default configs
 let CONFIG = { "terror-interval": 1000 };
@@ -8,6 +12,12 @@ const CONFIG_PATH = 'terror_config.json';
 
 // Add sample() to randomly choose an element from an array
 Array.prototype.sample = function(){ return this[Math.floor(Math.random()*this.length)]; }
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function createWindow() {
   // Get the primary display's dimensions
@@ -195,10 +205,29 @@ function video_window(mode, is_heads=-1) {
 }
 
 function start_terror_loop() {
-    setInterval(run_random_terror, CONFIG['terror-interval']);
+    // start_offering_to_exit();
+    randomterrorID = setInterval(run_random_terror, CONFIG['terror-interval']);
+    setTimeout(offer_to_exit, 5000, randomterrorID);
     // terror_notification();
     // terror_malware_popups();
-    video_window(1);
+    // video_window(1);
+}
+
+async function offer_to_exit(randomterrorID) {
+    clearInterval(randomterrorID);
+    heads_or_tails = Math.random() < 0.5;
+    // heads_or_tails = false;
+
+    if (heads_or_tails) {
+        app.quit();
+    } else {
+        video_window(1);
+        await sleep(30000);
+    }
+
+
+    newID = setInterval(run_random_terror, CONFIG['terror-interval']);
+    setTimeout(offer_to_exit, 5000, newID);
 }
 
 
@@ -227,7 +256,6 @@ app.whenReady().then(() => {
         CONFIG = JSON.parse(data);
       }
     });
-
 
 
     ipcMain.on('begin_terrorizing', start_terror_loop);
