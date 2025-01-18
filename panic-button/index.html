@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Panic Conflict</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            -webkit-app-region: drag; /* Makes the window draggable */
+        }
+
+        #actionButton {
+            display: none;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: #ff0000;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            -webkit-app-region: no-drag; /* Makes the button clickable */
+        }
+
+        #actionButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        #actionButton:active {
+            transform: scale(0.95);
+        }
+    </style>
+    <audio id="eerie-sound" loop>
+      <source src="assets/eerie.mp3" type="audio/mpeg" />
+      Imagine, if you will, spooky music. 
+      Then imagine a browser that supports the audio element.
+    </audio>
+</head>
+<body>
+    <button id="actionButton"></button>
+    <script src="renderer.js"></script>
+</body>
+</html>
