@@ -1,0 +1,19 @@
+{
+  "name": "panic-button",
+  "version": "1.0.0",
+  "description": "We are panicking",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "panic_button"
+  },
+  "author": "tewenhao, lynusl, aekas717",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.0.0"
+  }
+}
