@@ -43,7 +43,7 @@ function randomizeButtons() {
 
 function runaway() {
     escapeCount++;
-    if (escapeCount <= 3) {
+    if (escapeCount <= 5) {
         randomizeButtons();
     }
     console.log(escapeCount)
