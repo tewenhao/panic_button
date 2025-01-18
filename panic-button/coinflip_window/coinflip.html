@@ -14,13 +14,13 @@
             font-size: 16px;
         }
     </style>
+    <script src="coinflip_renderer.js"></script>
 </head>
 <body>
     <h1>Coin Flip Game</h1>
     <p>Choose heads or tails to flip the coin.</p>
-    <button id='heads' onclick="flipCoin('heads')">Heads</button>
-    <button id='tails' onclick="flipCoin('tails')">Tails</button>
+    <button id='heads' onclick="flipCoin('heads')" onmouseenter="runaway()">Heads</button>
+    <button id='tails' onclick="flipCoin('tails')" onmouseenter="runaway()">Tails</button>
     <p id="result"></p>
-    <script src="coinflip_renderer.js"></script>
 </body>
 </html>

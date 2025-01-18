@@ -1,5 +1,7 @@
 let flipCount = 0;
 
+let escapeCount = 0;
+
 function flipCoin(userChoice) {
     flipCount++;
     let outcome;
@@ -39,6 +41,17 @@ function randomizeButtons() {
 
 }
 
-window.onload(() => {
-    randomizeButtons();
-})
+function runaway() {
+    escapeCount++;
+    if (escapeCount <= 3) {
+        randomizeButtons();
+    }
+    console.log(escapeCount)
+}
+
+window.onload = () => {
+    // setInterval(randomizeButtons, 1000);
+
+    // document.getElementById('heads').addEventListener("mouseenter",  runaway);
+    // document.getElementById('tails').addEventListener("mouseenter",  runaway);
+}
