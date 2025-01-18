@@ -8,6 +8,7 @@ button.addEventListener('click', () => {
 });
 
 function triggerEvent() {
+    document.getElementById('eerie-sound').play();
     // This function can contain different events that you want to trigger
     // For example:
     // - Animate the button
