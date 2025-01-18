@@ -18,7 +18,8 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false // Note: In production, you should enable contextIsolation
-    }
+    },
+    movable: false
   })
 
   // Load the index.html file
