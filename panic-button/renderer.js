@@ -1,22 +1,28 @@
-const button = document.getElementById('actionButton');
+let btntimeout = null;
 
-button.addEventListener('click', () => {
-    // Add your event handling logic here
-    console.log('Button clicked!');
-    // Example of how to trigger different events:
-    triggerEvent();
-});
-
-function triggerEvent() {
+function big_red_button_unpressed() {
+    clearTimeout(btntimeout);
     document.getElementById('eerie-sound').play();
     document.getElementById('actionButton').style.display = 'none';
     // window.electronAPI.setTitle('Panic Button');
     window.actions.begin_terrorizing();
-    // This function can contain different events that you want to trigger
-    // For example:
-    // - Animate the button
-    // - Show notifications
-    // - Change window properties
-    // - Make API calls
-    // - etc.
+}
+
+function big_red_button_pressed() {
+    clearTimeout(btntimeout);
+    document.getElementById('actionButton').style.display = 'none';
+    btntimeout = setTimeout(display_big_red_button, 5000);
+}
+
+function display_big_red_button() {
+    clearTimeout(btntimeout);
+    document.getElementById('actionButton').style.display = 'block';
+    btntimeout = setTimeout(big_red_button_unpressed, 3000);
+}
+
+window.onload = () => {
+    document.getElementById('actionButton').addEventListener('click', () => {
+        big_red_button_pressed();
+    });
+    big_red_button_pressed();
 }
