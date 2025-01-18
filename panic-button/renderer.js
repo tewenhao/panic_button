@@ -11,8 +11,8 @@ function big_red_button_unpressed() {
 
 function big_red_button_pressed() {
     clearTimeout(btntimeout);
-    document.getElementById('actionButton').style.display = 'none';
     window.actions.set_on_top('set-always-on-top', false);
+    document.getElementById('actionButton').style.display = 'none';
     btntimeout = setTimeout(display_big_red_button, 5000);
 }
 

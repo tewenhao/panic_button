@@ -57,11 +57,18 @@ function createWindow() {
 // Register the ipcMain listener outside of createWindow
 ipcMain.on('set-always-on-top', (event, flag) => {
   const mainWindow = BrowserWindow.getAllWindows()[0];
-  if (mainWindow && flag) {
+  if (flag) {
     mainWindow.moveTop();
     mainWindow.setAlwaysOnTop(flag);
-    console.log(`Set always on top: ${flag}`);
-    console.log(`Window is always on top: ${mainWindow.isAlwaysOnTop()}`);
+    mainWindow.focus();
+    // console.log(`Set always on top: ${flag}`);
+    // console.log(`Window is always on top: ${mainWindow.isAlwaysOnTop()}`);
+  }
+
+  else {
+    mainWindow.setAlwaysOnTop(flag);
+    // console.log(`Set always on top: ${flag}`);
+    // console.log(`Window is always on top: ${mainWindow.isAlwaysOnTop()}`);
   }
 });
 
