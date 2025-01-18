@@ -197,23 +197,27 @@ function coinflip_window() {
 function video_window(mode, is_heads=-1) {
     const { width, height } = require('electron').screen.getPrimaryDisplay().workAreaSize;
     let vid_path;
-    let window_width;
-    let window_height;
+    let window_width, window_height;
+    let html_path;
     
     if (mode == 0) {
         vid_path = is_heads ? "assets/heads-or-tails/heads.mp4" : "assets/heads-or-tails/tails.mp4";
         window_width = 500;
         window_height = 500;
+        html_path = 'video_player.html';
     }
-    
     else if (mode == 1) {
         vid_path = "assets/unskippable-ad/ad.mp4"
         window_width = width - 100;
         window_height = height - 100;
+        html_path = 'video_player.html';
+
     } else if (mode == 2) {
         vid_path = 'assets/ultrakill-5s-congrats.mp4'
         window_width = 500;
         window_height = 500;
+        html_path = 'stretchy_player.html';
+
     }
 
     let videoWindow = new BrowserWindow({
@@ -232,7 +236,7 @@ function video_window(mode, is_heads=-1) {
     });
 
     // Load the HTML file
-    videoWindow.loadFile('video_player.html'); // Update with the correct path
+    videoWindow.loadFile(html_path); // Update with the correct path
 
     videoWindow.once('ready-to-show', () => {
         // Send the video path to the renderer process
@@ -279,7 +283,7 @@ async function reconcile_exit_coinflip(choice) {
 
     if (user_success) {
         video_window(2); // display ultrakill congrats
-        await sleep(30000);
+        await sleep(26000);
 
         app.quit();
 
@@ -328,6 +332,7 @@ app.whenReady().then(() => {
     });
 
 
-    ipcMain.on('begin_terrorizing', start_terror_loop);
+    // ipcMain.on('begin_terrorizing', start_terror_loop);
     createWindow();
+    video_window(2);
 });
