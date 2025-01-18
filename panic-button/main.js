@@ -1,6 +1,10 @@
 const { app, BrowserWindow, screen, ipcMain, Notification } = require('electron')
 const path = require('path')
 
+Array.prototype.sample = function(){
+    return this[Math.floor(Math.random()*this.length)];
+  }
+
 function createWindow() {
   // Get the primary display's dimensions
   const primaryDisplay = screen.getPrimaryDisplay()
@@ -9,6 +13,7 @@ function createWindow() {
   // Create a window with transparent background
   const mainWindow = new BrowserWindow({
     icon: 'assets/icon.png',
+    // type: 'toolbar',
     width: width,
     height: height,
     x: 0,
@@ -51,29 +56,53 @@ app.on('activate', () => {
 })
 
 function terror_notification() {
-    
-    const NOTIFICATION_TITLE = 'Basic Notification ' + Math.floor(Math.random() * 1000);
-    const NOTIFICATION_BODY = 'Notification from the Main process';
 
-    new Notification({title: NOTIFICATION_TITLE,body: NOTIFICATION_BODY}).show()
+    const NOTIFICATION_TYPES = ['Default', 'WhatsApp', 'Telegram']
+    let notif_type = NOTIFICATION_TYPES.sample();
+
+    // let NOTIFICAION_SENDERID = app.getName();
+    let NOTIFICATION_TITLE = 'Gentle Reminder 😊';
+    let NOTIFICATION_BODY = 'LOCK IN LOCK IN LOCK IN LOCK IN LOCK IN LOCK IN LOCK IN LOCK IN';
+    let NOTIFICATION_ICON = 'assets/icon.png';
+
+    
+    switch (notif_type) {
+        case 'WhatsApp':
+            // NOTIFICAION_SENDERID = 'WhatsApp';
+            NOTIFICATION_TITLE = 'Professor ?????';
+            NOTIFICATION_BODY = 'I noticed you have not submitted your assignment. Please do so by the end of the day.';
+            NOTIFICATION_ICON = 'assets/notification-icons/WhatsApp_default_pfp.png';
+            break;
+        case 'Telegram':
+            // NOTIFICAION_SENDERID = 'Telegram';
+            NOTIFICATION_TITLE = 'Group Project #6';
+            NOTIFICATION_BODY = '+65 82637422: Eh guys submission is tmr, how ah';
+            NOTIFICATION_ICON = 'assets/notification-icons/telegram.png';
+            break;
+        default:
+    }
+
+    new Notification({
+        title: NOTIFICATION_TITLE,
+        body: NOTIFICATION_BODY,
+        icon: path.join(__dirname, NOTIFICATION_ICON),
+    }).show()
+
 }
 
 function run_random_terror() {
     const terror_funcs = [terror_notification];
-    let i = Math.floor(Math.random() * terror_funcs.length);
-    let r = terror_funcs[i];
-    r();
+    terror_funcs.sample()();
 }
 
+app.setName('Panic Button');
 function start_terror_loop() {
     setInterval(run_random_terror, 5000);
     // terror_notification();
 }
 
 
-
-
-
+if (process.platform === 'win32'){ app.setAppUserModelId(app.getName()); }
 app.whenReady().then(() => {
     ipcMain.on('set-title', handleSetTitle);
     ipcMain.on('begin_terrorizing', start_terror_loop);
