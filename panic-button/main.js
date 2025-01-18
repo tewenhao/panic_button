@@ -4,7 +4,7 @@ const path = require('path')
 
 // default configs
 let CONFIG = { "terror-interval": 1000 };
-const CONFIG_PATH = CONFIG_PATH;
+const CONFIG_PATH = 'terror_config.json';
 
 // Add sample() to randomly choose an element from an array
 Array.prototype.sample = function(){ return this[Math.floor(Math.random()*this.length)]; }
@@ -169,9 +169,9 @@ app.on('activate', () => {
 
 // show window when app is ready
 app.whenReady().then(() => {
-    fs.readFile(CONFIG_PATH, 'utf8', function (err, data) {
+    fs.readFile('terror_config.json', 'utf8', function (err, data) {
       if (err) {
-        fs.writeFile(CONFIG_PATH, JSON.stringify(CONFIG), 'utf8', function(err) {if (err) throw err;});
+        fs.writeFile('terror_config.json', JSON.stringify(CONFIG), 'utf8', function(err) {if (err) throw err;});
       } else {
         CONFIG = JSON.parse(data);
       }
