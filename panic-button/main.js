@@ -170,11 +170,20 @@ function coinflip_window() {
         show: false,
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: true,
+            preload: path.join(__dirname, 'coinflip_window/coinflip_preload.js')
         }
     });
 
-    coinflipWindow.loadFile("coinflip.html");
+    coinflipWindow.loadFile("coinflip_window/coinflip.html");
+
+    coinflipWindow.once('ready-to-show', () => {
+        coinflipWindow.show();
+    });
+
+    ipcMain.once('close_window', () => {
+        coinflipWindow.close();
+    });
 }
 
 /// mode: an integer that takes the value of either 0 or 1, each representing a different case
@@ -235,15 +244,22 @@ function start_terror_loop() {
     // terror_notification();
     // terror_malware_popups();
     // video_window(1);
+    // offer_to_exit(0);
 }
 
 async function offer_to_exit(randomterrorID) {
     clearInterval(randomterrorID);
-    
-    // heads_or_tails = Math.random() < 0.5;
-    heads_or_tails = false;
+    coinflip_window();  
 
-    if (heads_or_tails) {
+    ipcMain.once('submit_user_choice', (event, answer) => reconcile_exit_coinflip(answer))
+}
+
+async function reconcile_exit_coinflip(choice) {
+
+    // let heads_or_tails = Math.random() < 0.5 ? 'heads' : 'tails';
+    let heads_or_tails = 'heads';
+
+    if (choice != heads_or_tails) {
         app.quit();
 
     } else {
