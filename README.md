@@ -35,9 +35,9 @@ This app is an app aimed at enhancing a user’s productivity:
 3. Click that button within a few seconds and you can return to doing your productive work.
 4. However, if you don't, there are consequences. You will get a glimpse into your future: late reminders for your work, system errors, and more!
 5. To bail out of this, at random intervals, you will bet on a coin flip. (As a penalty for slacking, the coin flip becomes extra challenging, with the buttons moving to random locations on the screen at least 5 times.)
-    a. Guess the outcome of the coin flip correctly, and you will be shown a congratulatory video before the app absolves you of your sins (slacking). 
-    b. Guess wrongly and you will be shown an unskippable ad before having to wait for the next coinflip. Don’t worry - the reminders, panic messages, and popups will continue to be with you!
-7. Steps 2 to 6 periodically to make sure you are paying attention and do not procrastinate your work !
+    - Guess the outcome of the coin flip correctly, and you will be shown a congratulatory video before the app absolves you of your sins (slacking). 
+    - Guess wrongly and you will be shown an unskippable ad before having to wait for the next coinflip. Don’t worry - the reminders, panic messages, and popups will continue to be with you!
+6. Steps 2 to 5 periodically to make sure you are paying attention and do not procrastinate your work !
 
 
 ## How we built it
