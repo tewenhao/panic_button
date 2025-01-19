@@ -28,7 +28,7 @@ function createWindow() {
   // Create a window with transparent background
   const mainWindow = new BrowserWindow({
     icon: path.join(__dirname, 'assets', 'icon.png'),
-    // type: 'toolbar',
+    type: 'toolbar',
     width: width,
     height: height,
     x: 0,
