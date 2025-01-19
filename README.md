@@ -28,14 +28,17 @@ Getting nagged by our boss all the time for procrastinating and not doing our wo
 
 ## What it does
 
-> En Hao’s rambles: Did you mean what we wanted it to do…? Yea, that’s just to be annoying. Like VERY ANNOYING.
->
-> Oh. you meant actual functionality. Oh. ohhhhhh. Ok um. Yea.
+This app is an app aimed at enhancing a user’s productivity:
 
-1. When the app starts, you can alt-tab out and continue with your productive work!
-2. Every X time measurements, a **BIG RED BUTTON** comes out to check if you are slacking. Are you slacking? No right?
-3. What happens if you are slacking is a wonderful experience that should be experienced for yourself! Run our app to find out more!
-4. To end this wonderful experience, please roll NAT20 luck check
+1. The user opens this productivity app.
+2. Periodically, the app will activate a big red button on your screen. It’s always on top of any other window, so there’s no excuse for missing it!
+3. Click that button within a few seconds and you can return to doing your productive work.
+4. However, if you don't, there are consequences. You will get a glimpse into your future: late reminders for your work, system errors, and more!
+5. To bail out of this, at random intervals, you will bet on a coin flip. (As a penalty for slacking, the coin flip becomes extra challenging, with the buttons moving to random locations on the screen at least 5 times.)
+    a. Guess the outcome of the coin flip correctly, and you will be shown a congratulatory video before the app absolves you of your sins (slacking). 
+    b. Guess wrongly and you will be shown an unskippable ad before having to wait for the next coinflip. Don’t worry - the reminders, panic messages, and popups will continue to be with you!
+7. Steps 2 to 6 periodically to make sure you are paying attention and do not procrastinate your work !
+
 
 ## How we built it
 
